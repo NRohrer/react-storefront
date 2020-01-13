@@ -360,7 +360,6 @@ function isAmp(url) {
  * @return {Boolean}
  */
 function shouldServeHTMLFromCache(url, event) {
-  if (!event.request.referrer) return false
   return (
     '{{serveSSRFromCache}}' === 'true' ||
     isAmp(new URL(event.request.referrer)) ||
