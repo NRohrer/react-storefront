@@ -362,7 +362,7 @@ function isAmp(url) {
 function shouldServeHTMLFromCache(url, event) {
   return (
     '{{serveSSRFromCache}}' === 'true' ||
-    isAmp(new URL(event.request.referrer)) ||
+    (event.request.referrer != null && isAmp(new URL(event.request.referrer))) ||
     /\?source=pwa/.test(url.search) ||
     /(\?|&)powerlink/.test(url.search)
   )
