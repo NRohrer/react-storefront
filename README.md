@@ -74,9 +74,11 @@ yarn release
 
 ## Changelog
 
-### 6.74.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.74.0...v6.74.1)
 
-- Fixed service worker bugs which caused cached responses to never be matched and/or used
+### 6.75.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.74.0...v6.75.0)
+
+- Add support for `lazyOffset` on the `<Image />` component when horizontal scrolling
+- Fixed service worker bugs which caused cached responses to never be matched and/or used when URLs contain an "&" in the query string.
 - Allow requests of type `application/json` to be not be valid JSON. Requests of this type that contain unparsable JSON will now log a warning message rather than force the request to fail entirely.
 
 ### 6.74.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.73.0...v6.74.0)
