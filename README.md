@@ -74,7 +74,7 @@ yarn release
 
 ## Changelog
 
-### 6.73.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.73.0...v6.73.1)
+### 6.74.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.74.0...v6.74.1)
 
 - Fixed service worker bugs which caused cached responses to never be matched and/or used
 
