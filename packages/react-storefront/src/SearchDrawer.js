@@ -202,7 +202,11 @@ export default class SearchDrawer extends Component {
     /**
      * Props to be applied to the underlying Drawer component
      */
-    drawerProps: PropTypes.object
+    drawerProps: PropTypes.object,
+    /**
+     * Props to be applied to the underlying Input component
+     */
+    inputProps: PropTypes.object
   }
 
   static defaultProps = {
@@ -252,7 +256,8 @@ export default class SearchDrawer extends Component {
       showClearButton,
       searchURL,
       searchFieldName,
-      amp
+      amp,
+      inputProps
     } = this.props
 
     const HideWhenEmpty = ({ children }) => (
@@ -291,7 +296,8 @@ export default class SearchDrawer extends Component {
                     onFocus={this.onInputFocus}
                     onChange={e => this.onChangeSearchText(e.target.value)}
                     inputProps={{
-                      'amp-bind': 'value=>rsfSearchDrawer.searchText'
+                      'amp-bind': 'value=>rsfSearchDrawer.searchText',
+                      ...inputProps
                     }}
                     on="input-debounced:AMP.setState({ rsfSearchDrawer: { searchText: rsfSearchDrawer.___moov_submitting ? rsfSearchDrawer.searchText : event.value } })"
                     disableUnderline
