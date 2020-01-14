@@ -74,6 +74,9 @@ yarn release
 
 ## Changelog
 
+### 6.75.1 [diff](https://github.com/moovweb/react-storefront/compare/v6.75.0...v6.75.1)
+
+- Added webpack config option for disabling eslint
 
 ### 6.75.0 [diff](https://github.com/moovweb/react-storefront/compare/v6.74.0...v6.75.0)
 
