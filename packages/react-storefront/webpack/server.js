@@ -16,13 +16,20 @@ module.exports = {
    * @return {Object} A webpack config
    * @param {Object} options
    * @param {Object} options.eslintConfig A config object for eslint
+   * @param {Object} options.disableEslint Option for disabling eslint during build
    * @param {Object} options.additionalRules Additional rules to add the webpack config
    * @param {Object} options.envVariables Environment variables to inject into the build
    * @param {Object} options.alias Aliases to apply to the webpack config
    */
   dev(
     root,
-    { eslintConfig = require('./eslint-server'), envVariables = {}, rules = [], alias = {} } = {}
+    {
+      eslintConfig = require('./eslint-server'),
+      envVariables = {},
+      rules = [],
+      alias = {},
+      disableEslint
+    } = {}
   ) {
     const webpack = require(path.join(root, 'node_modules', 'webpack'))
 
@@ -52,7 +59,8 @@ module.exports = {
             envName: 'development-server',
             assetsPath: '../build/assets/pwa',
             eslintConfig,
-            additionalRules: rules
+            additionalRules: rules,
+            disableEslint
           })
         },
         devtool: 'cheap-module-source-map',
@@ -78,10 +86,11 @@ module.exports = {
    * @param {String} root The path to the root of the project
    * @param {Object} options
    * @param {Object} options.envVariables Environment variables to inject into the build
+   * @param {Object} options.disableEslint Option for disabling eslint during build
    * @param {Object} options.alias Aliases to apply to the webpack config
    * @return {Object} A webpack config
    */
-  prod(root, { envVariables = {}, alias = {} } = {}) {
+  prod(root, { envVariables = {}, alias = {}, disableEslint } = {}) {
     const webpack = require(path.join(root, 'node_modules', 'webpack'))
 
     alias = {
@@ -108,7 +117,8 @@ module.exports = {
         module: {
           rules: createLoaders(root, {
             envName: 'production-server',
-            eslintConfig: './eslint-server'
+            eslintConfig: './eslint-server',
+            disableEslint
           })
         },
         plugins: [

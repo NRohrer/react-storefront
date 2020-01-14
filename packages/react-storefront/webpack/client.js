@@ -110,6 +110,7 @@ module.exports = {
    * @param {Number} options.prefetchRampUpTime The number of milliseconds from the time of the build before prefetching is ramped up to 100%
    * @param {Boolean} options.allowPrefetchThrottling Set to true allow the platform to return a 412 error when a prefetch request results in a cache miss
    * @param {Object} options.eslintConfig A config object for eslint
+   * @param {Object} options.disableEslint Option for disabling eslint during build
    * @param {Boolean} options.optimization Configuration for the webpack optimzation object
    * @param {Object} options.alias Aliases to apply to the webpack config
    * @return {Object} A webpack config
@@ -124,6 +125,7 @@ module.exports = {
       prefetchRampUpTime = -5000, // compensate for the 5 minute buffer for deployments so that there is no ramp up time
       allowPrefetchThrottling = false,
       serveSSRFromCache = false,
+      disableEslint = false,
       optimization,
       alias = {}
     } = {}
@@ -152,7 +154,8 @@ module.exports = {
         module: {
           rules: createLoaders(path.resolve(root, 'src'), {
             envName: 'development-client',
-            eslintConfig
+            eslintConfig,
+            disableEslint
           })
         },
         plugins: [
@@ -194,6 +197,7 @@ module.exports = {
    * @param {Object} options.entries Additional entries for adapt components
    * @param {Array}  options.additionalPlugins Additional plugins
    * @param {Object} options.workboxConfig A config object for InjectManifest from workbox-webpack-plugin.  See https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#configuration
+   * @param {Object} options.disableEslint Option for disabling eslint during build
    * @param {Number} options.prefetchRampUpTime The number of milliseconds from the time of the build before prefetching is ramped up to 100%
    * @param {Boolean} options.allowPrefetchThrottling Set to true allow the platform to return a 412 error when a prefetch request results in a cache miss
    * @param {Boolean} options.optimization Configuration for the webpack optimzation object
@@ -210,6 +214,7 @@ module.exports = {
       allowPrefetchThrottling = false,
       serveSSRFromCache = false,
       optimization,
+      disableEslint,
       alias = {}
     } = {}
   ) {
@@ -240,7 +245,10 @@ module.exports = {
       optimization: createOptimization({ production: true, overrides: optimization }),
       devtool: 'source-map',
       module: {
-        rules: createLoaders(path.resolve(root, 'src'), { envName: 'production-client' })
+        rules: createLoaders(path.resolve(root, 'src'), {
+          envName: 'production-client',
+          disableEslint
+        })
       },
       plugins: [
         new webpack.LoaderOptionsPlugin({

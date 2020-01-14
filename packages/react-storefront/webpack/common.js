@@ -60,22 +60,27 @@ function createServerConfig(root, alias) {
   }
 }
 
-function createLoaders(sourcePath, { envName, assetsPath = '.', eslintConfig } = {}) {
+function createLoaders(
+  sourcePath,
+  { envName, assetsPath = '.', eslintConfig, disableEslint } = {}
+) {
   return [
     {
       test: /\.js$/,
       enforce: 'pre',
       include: sourcePath,
-      use: [
-        {
-          loader: 'eslint-loader',
-          options: {
-            formatter: eslintFormatter,
-            eslintPath: require.resolve('eslint'),
-            baseConfig: eslintConfig
-          }
-        }
-      ]
+      use: disableEslint
+        ? []
+        : [
+            {
+              loader: 'eslint-loader',
+              options: {
+                formatter: eslintFormatter,
+                eslintPath: require.resolve('eslint'),
+                baseConfig: eslintConfig
+              }
+            }
+          ]
     },
     {
       test: /\.js$/,
