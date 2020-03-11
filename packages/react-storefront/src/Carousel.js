@@ -222,7 +222,7 @@ export default class Carousel extends Component {
             <div className={classes.arrows}>
               {selectedIndex !== 0 && (
                 <IconButton
-                  aria-label='previous'
+                  aria-label="previous"
                   className={classnames(classes.arrow, classes.leftArrow)}
                   onClick={() => this.setState({ selectedIndex: selectedIndex - 1 })}
                 >
@@ -231,7 +231,7 @@ export default class Carousel extends Component {
               )}
               {selectedIndex !== slideCount - 1 && (
                 <IconButton
-                  aria-label='next'
+                  aria-label="next"
                   className={classnames(classes.arrow, classes.rightArrow)}
                   onClick={() => this.setState({ selectedIndex: selectedIndex + 1 })}
                 >
